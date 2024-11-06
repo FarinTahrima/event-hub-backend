@@ -120,9 +120,26 @@ public class EventService {
             .orElseThrow(() -> new AccountNotFoundException("Account not found"));
     }
 
-    private Event getEventOrThrow(Long eventId) throws EventNotFoundException {
+    protected Event getEventOrThrow(Long eventId) throws EventNotFoundException {
         return eventRepository.findById(eventId)
             .orElseThrow(() -> new EventNotFoundException("Event not found"));
+    }
+
+    private Event getEventByCodeOrThrow(String code) throws EventNotFoundException {
+        return eventRepository.findByCode(code)
+                .orElseThrow(() -> new EventNotFoundException("Event not found"));
+    }
+
+    @Transactional
+    public Event startEvent(String eventCode)
+            throws
+            EventNotFoundException,
+            IllegalArgumentException
+    {
+        Event event = getEventByCodeOrThrow(eventCode);
+        event.setStartedByHost(true);
+        event.setSelectedOrderNumber(1);
+        return eventRepository.save(event);
     }
 }
 

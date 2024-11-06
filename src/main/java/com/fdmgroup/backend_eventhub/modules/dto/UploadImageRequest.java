@@ -1,4 +1,4 @@
-package com.fdmgroup.backend_eventhub.eventsession.dto;
+package com.fdmgroup.backend_eventhub.modules.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 

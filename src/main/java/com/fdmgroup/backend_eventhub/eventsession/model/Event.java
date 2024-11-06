@@ -33,6 +33,9 @@ public class Event {
     // Add password to authenticate users joining a watchparty
     private String password;
 
+    private boolean isStartedByHost;
+    private long selectedOrderNumber;
+
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate scheduledDate;
 
@@ -46,10 +49,6 @@ public class Event {
     @JoinColumn(name = "account_id")
     @JsonIgnore
     private Account account;
-
-    @OneToOne(mappedBy = "event")
-    @JsonIgnore
-    private Poll poll;
 
     @OneToMany(mappedBy = "event")
     @JsonIgnore

@@ -21,7 +21,6 @@ public class Content {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private ContentType type;
 
     private long orderNumber;
 

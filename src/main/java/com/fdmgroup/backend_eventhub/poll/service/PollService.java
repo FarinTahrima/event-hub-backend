@@ -38,7 +38,7 @@ public class PollService {
             Poll poll = new Poll();
 
             poll.setQuestion(question);
-            poll.setEvent(event.get());
+            //poll.setEvent(event.get());
 
             return pollRepository.save(poll);
         } else {

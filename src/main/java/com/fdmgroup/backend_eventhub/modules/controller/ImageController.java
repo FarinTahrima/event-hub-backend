@@ -1,4 +1,4 @@
-package com.fdmgroup.backend_eventhub.eventsession.controller;
+package com.fdmgroup.backend_eventhub.modules.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 @RestController
-@RequestMapping("/api/image")
+@RequestMapping("/api/modules/image")
 public class ImageController {
     // Save image in a local directory
     @PostMapping("/upload")

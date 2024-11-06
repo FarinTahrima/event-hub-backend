@@ -197,4 +197,17 @@ public class EventController {
     }
   }
 
+  @PostMapping("/start-event/{code}")
+  public ResponseEntity<?> startEvent(@PathVariable String code) {
+    Event event = null;
+    try {
+      event = eventService.startEvent(code);
+    } catch ( EventNotFoundException e ) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(EVENT_ID_NOT_FOUND_MESSAGE);
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ILLEGAL_PARAMETERS_MESSAGE);
+    }
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(event);
+  }
 }

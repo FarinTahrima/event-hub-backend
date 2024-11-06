@@ -24,11 +24,6 @@ public class Poll {
 
     private String question;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "event_id")
-    @JsonIgnore
-    private Event event;
-
     @OneToMany(mappedBy = "poll")
     @JsonIgnore
     private List<PollOption> pollOptions = new ArrayList<>();
