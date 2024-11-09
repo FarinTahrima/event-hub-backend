@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/video/**")
+        registry.addResourceHandler("/videos/**")
                 .addResourceLocations(VIDEO_DIRECTORY_PATH);
     }
 
