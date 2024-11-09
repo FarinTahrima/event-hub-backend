@@ -15,9 +15,6 @@ import java.time.LocalDate;
 @Setter
 public class VideoModule extends Module {
     private String videoTitle;
-    private LocalDate uploadedDate;
     private long durationSecond;
-    private String thumbnailURL;
-    private String videoURL;
-
+    private String videoUrl;
 }

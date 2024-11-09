@@ -38,4 +38,8 @@ public class ContentService {
         }
         return contentList;
     }
+
+    public void removeContent(Long contentId) {
+        contentRepository.deleteById(contentId);
+    }
 }
