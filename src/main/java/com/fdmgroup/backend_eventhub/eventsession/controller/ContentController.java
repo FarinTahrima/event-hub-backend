@@ -8,7 +8,9 @@ import com.fdmgroup.backend_eventhub.eventsession.exceptions.ContentNotFoundExce
 import com.fdmgroup.backend_eventhub.eventsession.exceptions.EventNotFoundException;
 import com.fdmgroup.backend_eventhub.eventsession.model.Content;
 import com.fdmgroup.backend_eventhub.eventsession.service.ContentService;
+import com.fdmgroup.backend_eventhub.modules.model.ImageModule;
 import com.fdmgroup.backend_eventhub.modules.model.VideoModule;
+import com.fdmgroup.backend_eventhub.modules.service.ImageService;
 import com.fdmgroup.backend_eventhub.modules.service.VideoService;
 import jakarta.servlet.annotation.MultipartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class ContentController {
     ContentService contentService;
 
     @Autowired
+    ImageService imageService;
+
+    @Autowired
     VideoService videoService;
 
     @PostMapping("/add-contents")
@@ -50,6 +55,12 @@ public class ContentController {
                         contentToCreate.getOrderNumber(),
                         contentToCreate.getModule()
                 );
+                //to save images
+                if (contentToCreate.getType().equalsIgnoreCase("Image")) {
+                    ImageModule imageModule = (ImageModule) contentToCreate.getModule();
+                    imageService.createImage(contentToCreate.getFile(), imageModule, content);
+                }
+
                 // to save videos
                 if (contentToCreate.getType().equalsIgnoreCase("Video")) {
                     VideoModule videoModule = (VideoModule) contentToCreate.getModule();
@@ -78,6 +89,9 @@ public class ContentController {
             for(int i=0; i<request.getContents().length; i++) {
                 // to remove videos
                 RemoveContentRequest contentToRemove = request.getContents()[i];
+                if (contentToRemove.getModuleType().equalsIgnoreCase("Image")) {
+                    imageService.deleteImage(contentToRemove.getModuleId());
+                }
                 if (contentToRemove.getModuleType().equalsIgnoreCase("Video")) {
                     videoService.deleteVideo(contentToRemove.getContentId(), contentToRemove.getModuleId());
                 }
