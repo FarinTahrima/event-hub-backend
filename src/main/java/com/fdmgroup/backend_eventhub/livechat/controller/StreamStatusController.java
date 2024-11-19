@@ -39,7 +39,7 @@ public class StreamStatusController {
         String wsSessionId = headerAccessor.getSessionId();
 
         if ( !streamMap.containsKey(sessionID) ) {
-            streamMap.put(sessionID, new StreamStatus(sessionID, -1, false));
+            streamMap.put(sessionID, new StreamStatus(sessionID, 0, false));
             sessionTracker.put(sessionID, new HashSet<>());
         }
 
@@ -62,7 +62,7 @@ public class StreamStatusController {
             case "VIEWER_JOIN": {
                 if ( !activeSessions.contains(wsSessionId) ) {
                     activeSessions.add(wsSessionId);
-                    stream.setViewerCount(activeSessions.size());
+                    stream.setViewerCount(activeSessions.size() - 1);
                     sessionTracker.put(sessionID, activeSessions);
                 }
                 break;
