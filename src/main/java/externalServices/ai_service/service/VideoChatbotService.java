@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -32,7 +35,9 @@ public class VideoChatbotService {
             Always maintain a helpful, positive tone appropriate for a professional sales environment.
             """;
 
-
+    @Retryable(value = { RestClientException.class },
+            maxAttempts = 3,
+            backoff = @Backoff(delay = 1000))
     public String generateResponse(String userInput) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -67,11 +72,10 @@ public class VideoChatbotService {
             Map<String, Object> response = restTemplate.postForObject(url, request, Map.class);
             return extractGeneratedText(response);
         } catch ( Exception e ) {
-            e.printStackTrace();
-            return "Error: " + e.getMessage();
+            System.out.println("Error calling Gemini API: " + e.getMessage());
+            return "Error calling Gemini API: " + e.getMessage();
         }
     }
-
 
     private String extractGeneratedText(Map<String, Object> response) {
         if ( response == null || !response.containsKey("candidates") ) {
