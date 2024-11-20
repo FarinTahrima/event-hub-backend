@@ -20,10 +20,10 @@ public class MessagePersistenceService {
     private MessageRepository messageRepository;
 
     @KafkaListener(topics = KafkaConstants.KAFKA_TOPIC, groupId = "chat-persistence")
-    public void persistMessage(Message message) {
+    public Message persistMessage(Message message) {
         System.out.println(message);
         // save message to database
-        messageRepository.save(message);
+        return messageRepository.save(message);
     }
 
     public Optional<List<Message>> findMessagesBySession(String sessionId) {

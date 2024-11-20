@@ -70,9 +70,9 @@ public class MessageController {
 //      System.out.println("Error sending message to kafka");
 //    }
 
-        messageSenderService.sendMessage(message);
+        Message savedMessage = messagePersistenceService.persistMessage(message);
 
-        messagePersistenceService.persistMessage(message);
+        messageSenderService.sendMessage(savedMessage);
 
 
     }
