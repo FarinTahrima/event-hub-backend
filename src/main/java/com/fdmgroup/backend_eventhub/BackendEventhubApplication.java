@@ -5,9 +5,9 @@ import externalServices.video_processing_service.VideoProcessingService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableAsync
@@ -16,12 +16,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = { "com.fdmgroup.backend_eventhub", "externalServices" })
 public class BackendEventhubApplication {
 
+    private static String VIDEO_TO_ENCODE = "laptop.mp4";
+
     public static void main(String[] args) {
         SpringApplication.run(BackendEventhubApplication.class, args);
 
         System.out.println("Eventhub backend has started running.");
         VideoProcessingService service = new VideoProcessingService();
-        service.mp4ToHls("laptop.mp4");
+        service.mp4ToHls(VIDEO_TO_ENCODE);
     }
 }
 
