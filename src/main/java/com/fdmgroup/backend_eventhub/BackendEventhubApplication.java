@@ -16,7 +16,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableJpaRepositories(basePackages = { "com.fdmgroup.backend_eventhub", "externalServices" })
 public class BackendEventhubApplication {
 
-    private static String VIDEO_TO_ENCODE = "laptop.mp4";
+    private static final String VIDEO_TO_ENCODE = "laptop.mp4";
 
     public static void main(String[] args) {
         SpringApplication.run(BackendEventhubApplication.class, args);
