@@ -3,6 +3,7 @@ package com.fdmgroup.backend_eventhub.livechat.controller;
 import com.fdmgroup.backend_eventhub.livechat.models.StreamStatus;
 import com.fdmgroup.backend_eventhub.livechat.models.StreamStatusNotification;
 import com.fdmgroup.backend_eventhub.livechat.models.StreamStatusRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -28,6 +29,7 @@ public class StreamStatusController {
 
     private final Map<String, Set<String>> sessionTracker = new ConcurrentHashMap<>();
 
+    @Autowired
     public StreamStatusController(SimpMessagingTemplate template) {
         this.template = template;
     }
@@ -101,8 +103,11 @@ public class StreamStatusController {
 
     @GetMapping("/api/streamStatus/{sessionID}")
     public ResponseEntity<StreamStatus> getStreamStatus(@PathVariable String sessionID) {
-        return ResponseEntity.ok(streamMap.get(sessionID));
-
+        StreamStatus status = streamMap.get(sessionID);
+        if (status == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(status);
     }
 
     @EventListener
