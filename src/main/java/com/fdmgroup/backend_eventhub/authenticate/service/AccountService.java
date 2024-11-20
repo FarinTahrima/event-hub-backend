@@ -18,12 +18,13 @@ public class AccountService {
 
     private static final Logger accountServiceLogger = LogManager.getLogger(AccountService.class);
 
-    @Autowired
-    private AccountRepository accountRepository;
-    private final BCryptPasswordEncoder newEncoder = new BCryptPasswordEncoder(10);
+    private final AccountRepository accountRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public AccountService() {
+    @Autowired
+    public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
+        this.passwordEncoder = new BCryptPasswordEncoder(10);
     }
 
     public Account updateAccount(Account accountToUpdate) {
@@ -33,7 +34,7 @@ public class AccountService {
                         existingAccount -> {
                             existingAccount.setUsername(accountToUpdate.getUsername());
                             existingAccount.setEmail(accountToUpdate.getEmail());
-                            existingAccount.setPassword(newEncoder.encode(accountToUpdate.getPassword()));
+                            existingAccount.setPassword(passwordEncoder.encode(accountToUpdate.getPassword()));
                             return accountRepository.save(existingAccount);
                         })
                 .orElse(null); // Account not found
@@ -67,7 +68,7 @@ public class AccountService {
         Account account = accountOptional.get();
 
         boolean passwordMatches =
-                newEncoder.matches(loginRequest.getPassword(), account.getPassword());
+                passwordEncoder.matches(loginRequest.getPassword(), account.getPassword());
 
         // Unsuccessful login due to incorrect password.
         if ( !passwordMatches ) {
@@ -88,7 +89,7 @@ public class AccountService {
 
         String username = registrationRequest.getUsername();
         String email = registrationRequest.getEmail();
-        String password = newEncoder.encode(registrationRequest.getPassword());
+        String password = passwordEncoder.encode(registrationRequest.getPassword());
 
         if ( !isValidUsername(username) ) {
             throw new InvalidUsernameException();
@@ -177,12 +178,6 @@ public class AccountService {
         if ( word.length != 1 ) {
             return false;
         }
-
-        int numberOfCharacters = 0;
-        for ( int i = 0; i < username.length(); i++ ) {
-            numberOfCharacters++;
-        }
-
-        return numberOfCharacters >= 5;
+        return username.length() >= 5;
     }
 }
