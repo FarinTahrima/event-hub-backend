@@ -12,16 +12,16 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableAsync
 @EnableConfigurationProperties(RSAKeyProperties.class)
-@ComponentScan(basePackages = {"com.fdmgroup.backend_eventhub", "externalServices"})
-@EnableJpaRepositories(basePackages = {"com.fdmgroup.backend_eventhub", "externalServices"})
+@ComponentScan(basePackages = { "com.fdmgroup.backend_eventhub", "externalServices" })
+@EnableJpaRepositories(basePackages = { "com.fdmgroup.backend_eventhub", "externalServices" })
 public class BackendEventhubApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BackendEventhubApplication.class, args);
+    public static void main(String[] args) {
+        SpringApplication.run(BackendEventhubApplication.class, args);
 
-		System.out.println("Eventhub backend has started running.");
-		VideoProcessingService service = new VideoProcessingService();
-		service.mp4ToHls("steamboatwillie_001.webm");
-	}
+        System.out.println("Eventhub backend has started running.");
+        VideoProcessingService service = new VideoProcessingService();
+        service.mp4ToHls("laptop.mp4");
+    }
 }
 
