@@ -1,24 +1,23 @@
 package com.fdmgroup.backend_eventhub.livechat.controller;
 
-import com.fdmgroup.backend_eventhub.livechat.constant.KafkaConstants;
 import com.fdmgroup.backend_eventhub.livechat.models.Message;
 import com.fdmgroup.backend_eventhub.livechat.service.MessagePersistenceService;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.ExecutionException;
-
 import com.fdmgroup.backend_eventhub.livechat.service.MessageSenderService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class MessageController {
@@ -59,7 +58,7 @@ public class MessageController {
         }
         message.setTimeStamp(LocalDateTime.now()); // assign to current time
         System.out.println("Received message: " + message); // Print the received message content
-//        messages.add(message);
+
 
 // Uncomment to use Kafka
 //    try {
@@ -70,9 +69,9 @@ public class MessageController {
 //      System.out.println("Error sending message to kafka");
 //    }
 
-        messageSenderService.sendMessage(message);
+        Message savedMessage = messagePersistenceService.persistMessage(message);
 
-        messagePersistenceService.persistMessage(message);
+        messageSenderService.sendMessage(savedMessage);
 
 
     }
@@ -110,10 +109,6 @@ public class MessageController {
             return ResponseEntity.ok(chatMessagesFromSession.get());
         }
 
-
-        //    return ResponseEntity.ok(chatMessagesFromSession);
-
-//        return ResponseEntity.ok(messages.stream().filter(message -> message.getSessionId().equals(sessionID)).toList());
     }
 
     @GetMapping("/api/clearMessages")

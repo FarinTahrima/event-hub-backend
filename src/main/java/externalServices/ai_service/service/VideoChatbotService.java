@@ -1,16 +1,19 @@
 package externalServices.ai_service.service;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 
 @Service
 public class VideoChatbotService {
@@ -22,8 +25,19 @@ public class VideoChatbotService {
 //    private final String PRE_PROMPT = "You are an AI assistant that analyzes Steamboat Willie. Make it short and concise " +
 //            "Respond to the user's input, but make sure your response is always about Steamboat Willie. " ;
 
-    private final String PRE_PROMPT = " ";
+    private final String PRE_PROMPT = """                     
+            You are an AI assistant that private final String PRE_PROMPT = You are an AI assistant that specializes in our company's latest laptop release.
+            You are participating in a live sales event and must provide enthusiastic, accurate, and concise responses about the laptop's features, specifications, and value proposition. Keep responses professional yet engaging, focusing on technical details and user benefits.
+            If asked about competitors or topics unrelated to our laptop, politely redirect the conversation back to our product. 
+            If you don't know specific details, acknowledge that and focus on the features you do know. 
+            Keep responses brief and sales-oriented while maintaining authenticity. 
+            Avoid making price commitments or promises about future features. 
+            Always maintain a helpful, positive tone appropriate for a professional sales environment.
+            """;
 
+    @Retryable(value = { RestClientException.class },
+            maxAttempts = 3,
+            backoff = @Backoff(delay = 1000))
     public String generateResponse(String userInput) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -58,11 +72,10 @@ public class VideoChatbotService {
             Map<String, Object> response = restTemplate.postForObject(url, request, Map.class);
             return extractGeneratedText(response);
         } catch ( Exception e ) {
-            e.printStackTrace();
-            return "Error: " + e.getMessage();
+            System.out.println("Error calling Gemini API: " + e.getMessage());
+            return "Error calling Gemini API: " + e.getMessage();
         }
     }
-
 
     private String extractGeneratedText(Map<String, Object> response) {
         if ( response == null || !response.containsKey("candidates") ) {
