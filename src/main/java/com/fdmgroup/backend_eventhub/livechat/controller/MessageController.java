@@ -58,7 +58,7 @@ public class MessageController {
         }
         message.setTimeStamp(LocalDateTime.now()); // assign to current time
         System.out.println("Received message: " + message); // Print the received message content
-//        messages.add(message);
+
 
 // Uncomment to use Kafka
 //    try {
@@ -108,7 +108,7 @@ public class MessageController {
         } else {
             return ResponseEntity.ok(chatMessagesFromSession.get());
         }
-        
+
     }
 
     @GetMapping("/api/clearMessages")

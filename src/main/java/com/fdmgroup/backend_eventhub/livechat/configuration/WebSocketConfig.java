@@ -29,8 +29,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         // withSockJs will allow the websockets to work even if the browser does not support
         // web sockets
 
-//        registry.addEndpoint("/streamStatus")
-//                .setAllowedOrigins("http://localhost:5173");
 
     }
 
