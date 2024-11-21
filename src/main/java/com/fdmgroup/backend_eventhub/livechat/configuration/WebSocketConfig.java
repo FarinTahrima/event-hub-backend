@@ -22,7 +22,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                         "/emoji",
                         "/moduleAction",
                         "/streamStatus",
-                        "/whiteboardAction")
+                        "/whiteboardAction",
+                        "/livePollAction",
+                        "/interactiveQAAction")
 //                .addInterceptors(handshakeInterceptor) // interceptor authenticates websocket connection
                 .setAllowedOrigins("http://localhost:5173") // allow requests from React app
                 .withSockJS(); // client should connect with SockJS

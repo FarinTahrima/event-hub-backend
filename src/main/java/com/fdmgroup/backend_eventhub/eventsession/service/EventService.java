@@ -3,7 +3,6 @@ package com.fdmgroup.backend_eventhub.eventsession.service;
 import com.fdmgroup.backend_eventhub.authenticate.model.Account;
 import com.fdmgroup.backend_eventhub.authenticate.repository.AccountRepository;
 import com.fdmgroup.backend_eventhub.eventsession.exceptions.EventNotFoundException;
-import com.fdmgroup.backend_eventhub.modules.service.VideoService;
 import com.fdmgroup.backend_eventhub.eventsession.model.Event;
 import com.fdmgroup.backend_eventhub.eventsession.repository.IEventRepository;
 import jakarta.transaction.Transactional;
@@ -21,13 +20,11 @@ public class EventService {
 
     private final IEventRepository eventRepository;
     private final AccountRepository accountRepository;
-    private final VideoService videoService;
 
     @Autowired
-    public EventService(IEventRepository eventRepository, AccountRepository accountRepository, VideoService videoService) {
+    public EventService(IEventRepository eventRepository, AccountRepository accountRepository) {
         this.eventRepository = eventRepository;
         this.accountRepository = accountRepository;
-        this.videoService = videoService;
     }
 
     @Transactional

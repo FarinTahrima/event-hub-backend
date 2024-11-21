@@ -1,8 +1,8 @@
-package com.fdmgroup.backend_eventhub.livechat.controller;
+package com.fdmgroup.backend_eventhub.modules.controller;
 
-import com.fdmgroup.backend_eventhub.livechat.models.StreamStatus;
-import com.fdmgroup.backend_eventhub.livechat.models.StreamStatusNotification;
-import com.fdmgroup.backend_eventhub.livechat.models.StreamStatusRecord;
+import com.fdmgroup.backend_eventhub.modules.model.StreamStatus;
+import com.fdmgroup.backend_eventhub.modules.model.StreamStatusNotification;
+import com.fdmgroup.backend_eventhub.modules.model.StreamStatusRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.http.ResponseEntity;

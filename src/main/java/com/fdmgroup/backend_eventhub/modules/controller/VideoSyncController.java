@@ -1,6 +1,6 @@
-package com.fdmgroup.backend_eventhub.livechat.controller;
+package com.fdmgroup.backend_eventhub.modules.controller;
 
-import com.fdmgroup.backend_eventhub.livechat.models.VideoAction;
+import com.fdmgroup.backend_eventhub.modules.model.VideoAction;
 import com.fdmgroup.backend_eventhub.livechat.service.VideoSyncService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

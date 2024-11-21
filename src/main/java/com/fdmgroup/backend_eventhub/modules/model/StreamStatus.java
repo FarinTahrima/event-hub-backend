@@ -1,4 +1,4 @@
-package com.fdmgroup.backend_eventhub.livechat.models;
+package com.fdmgroup.backend_eventhub.modules.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

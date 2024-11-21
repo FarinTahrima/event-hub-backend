@@ -3,7 +3,6 @@ package com.fdmgroup.backend_eventhub.eventsession.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fdmgroup.backend_eventhub.authenticate.model.Account;
-import com.fdmgroup.backend_eventhub.poll.model.Poll;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,13 +46,6 @@ public class Event {
     @JsonIgnore
     private Account account;
 
-    @OneToOne(mappedBy = "event")
-    @JsonIgnore
-    private Poll poll;
-
-    @OneToMany(mappedBy = "event")
-    @JsonIgnore
-    private List<Content> contents = new ArrayList<>();
 
     @PrePersist
     protected void onCreate() {

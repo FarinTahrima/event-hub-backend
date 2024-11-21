@@ -1,6 +1,6 @@
-package com.fdmgroup.backend_eventhub.livechat.controller;
+package com.fdmgroup.backend_eventhub.modules.controller;
 
-import com.fdmgroup.backend_eventhub.livechat.models.ModuleAction;
+import com.fdmgroup.backend_eventhub.modules.model.ModuleAction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;

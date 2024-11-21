@@ -1,4 +1,4 @@
-package com.fdmgroup.backend_eventhub.eventsession.controller;
+package com.fdmgroup.backend_eventhub.modules.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.fdmgroup.backend_eventhub.poll.dto;
+package com.fdmgroup.backend_eventhub.modules.dto;
 
 public class PollOptionRequest {
     private String description;

@@ -1,7 +1,7 @@
 package com.fdmgroup.backend_eventhub.livechat.service;
 
 import com.fdmgroup.backend_eventhub.livechat.constant.KafkaConstants;
-import com.fdmgroup.backend_eventhub.livechat.models.VideoAction;
+import com.fdmgroup.backend_eventhub.modules.model.VideoAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
