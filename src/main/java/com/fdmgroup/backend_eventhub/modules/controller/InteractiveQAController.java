@@ -13,7 +13,7 @@ public class InteractiveQAController {
         this.template = template;
     }
 
-    @MessageMapping("/livePollAction")
+    @MessageMapping("/interactiveQAAction")
     public void triggerInteractiveQAAction(InteractiveQAAction action) {
         System.out.println(action);
         template.convertAndSend("/topic/interactiveQAAction/" + action.SESSION_ID(), action);

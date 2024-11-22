@@ -1,6 +1,6 @@
 package com.fdmgroup.backend_eventhub.modules.controller;
 
-import com.fdmgroup.backend_eventhub.modules.model.PollAction;
+import com.fdmgroup.backend_eventhub.modules.model.LivePollAction;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
@@ -12,7 +12,7 @@ public class LivePollController {
     }
 
     @MessageMapping("/livePollAction")
-    public void triggerLivePollAction(PollAction action) {
+    public void triggerLivePollAction(LivePollAction action) {
         System.out.println(action);
         template.convertAndSend("/topic/livePollAction/" + action.SESSION_ID(), action);
 
