@@ -16,6 +16,7 @@ public class VideoSyncController {
 
     @Autowired
     private final VideoSyncService videoSyncService;
+    
 
     @MessageMapping("/video")
     public void handleVideoSyncAction(VideoAction action) {
