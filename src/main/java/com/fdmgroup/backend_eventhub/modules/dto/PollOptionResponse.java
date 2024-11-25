@@ -1,5 +1,10 @@
 package com.fdmgroup.backend_eventhub.modules.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class PollOptionResponse {
     private long pollOptionId;
     private String value;
@@ -7,43 +12,4 @@ public class PollOptionResponse {
     private String imageUrl;
     private long voteCount;
 
-    public long getPollOptionId() {
-        return pollOptionId;
-    }
-
-    public void setPollOptionId(long pollOptionId) {
-        this.pollOptionId = pollOptionId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public long getVoteCount() {
-        return voteCount;
-    }
-
-    public void setVoteCount(long voteCount) {
-        this.voteCount = voteCount;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
 }

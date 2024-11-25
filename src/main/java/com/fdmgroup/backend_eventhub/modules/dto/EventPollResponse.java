@@ -1,7 +1,12 @@
 package com.fdmgroup.backend_eventhub.modules.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@Setter
+@Getter
 public class EventPollResponse {
     private long pollId;
     private String pollQuestion;
@@ -10,43 +15,4 @@ public class EventPollResponse {
     private PollOptionResponse selectedPollOption;
 
 
-    public PollOptionResponse getSelectedPollOption() {
-        return selectedPollOption;
-    }
-
-    public void setSelectedPollOption(PollOptionResponse selectedPollOption) {
-        this.selectedPollOption = selectedPollOption;
-    }
-
-    public boolean isVoted() {
-        return voted;
-    }
-
-    public void setVoted(boolean voted) {
-        this.voted = voted;
-    }
-
-    public long getPollId() {
-        return pollId;
-    }
-
-    public void setPollId(long pollId) {
-        this.pollId = pollId;
-    }
-
-    public String getPollQuestion() {
-        return pollQuestion;
-    }
-
-    public void setPollQuestion(String pollQuestion) {
-        this.pollQuestion = pollQuestion;
-    }
-
-    public List<PollOptionResponse> getPollOptionList() {
-        return pollOptionList;
-    }
-
-    public void setPollOptionList(List<PollOptionResponse> pollOptionList) {
-        this.pollOptionList = pollOptionList;
-    }
 }
