@@ -3,6 +3,7 @@ package com.fdmgroup.backend_eventhub.livechat.service;
 import com.fdmgroup.backend_eventhub.livechat.constant.KafkaConstants;
 import com.fdmgroup.backend_eventhub.livechat.models.Message;
 import com.fdmgroup.backend_eventhub.livechat.repository.MessageRepository;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -11,11 +12,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@NoArgsConstructor
 public class MessagePersistenceService {
 //  @Autowired private IMessageRepository messageRepository;
 
-    @Autowired
+
     private MessageRepository messageRepository;
+
+    @Autowired
+    public MessagePersistenceService(MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+    }
 
     @KafkaListener(topics = KafkaConstants.KAFKA_TOPIC, groupId = "chat-persistence")
     public Message persistMessage(Message message) {
