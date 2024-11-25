@@ -19,7 +19,7 @@ public class MessagePersistenceService {
 
     @KafkaListener(topics = KafkaConstants.KAFKA_TOPIC, groupId = "chat-persistence")
     public Message persistMessage(Message message) {
-        System.out.println(message);
+//        System.out.println(message);
         // save message to database
         return messageRepository.save(message);
     }
