@@ -2,15 +2,19 @@ package com.fdmgroup.backend_eventhub.livechat.service;
 
 import com.fdmgroup.backend_eventhub.livechat.constant.KafkaConstants;
 import com.fdmgroup.backend_eventhub.livechat.models.Message;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
+@NoArgsConstructor
 public class MessageSenderService {
 
     SimpMessagingTemplate template;
 
+    @Autowired
     public MessageSenderService(SimpMessagingTemplate template) {
         this.template = template;
     }

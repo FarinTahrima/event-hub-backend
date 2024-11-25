@@ -22,17 +22,17 @@ import java.util.Optional;
 @RestController
 public class MessageController {
 
-    @Autowired
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
     private final List<Message> messages = new ArrayList<>();
 
-    @Autowired
+
     private final MessagePersistenceService messagePersistenceService;
 
-    @Autowired
+
     private final MessageSenderService messageSenderService;
 
+    @Autowired
     public MessageController(KafkaTemplate<String, Object> kafkaTemplate, MessagePersistenceService messagePersistenceService, MessageSenderService messageSenderService) {
         this.kafkaTemplate = kafkaTemplate;
         this.messagePersistenceService = messagePersistenceService;
@@ -59,15 +59,6 @@ public class MessageController {
         message.setTimeStamp(LocalDateTime.now()); // assign to current time
         System.out.println("Received message: " + message); // Print the received message content
 
-
-// Uncomment to use Kafka
-//    try {
-//      // Sending the message to kafka topic queue
-//      kafkaTemplate.send(KafkaConstants.KAFKA_TOPIC, message).get();
-//      System.out.println("Message sent to kafka");
-//    } catch (InterruptedException | ExecutionException e) {
-//      System.out.println("Error sending message to kafka");
-//    }
 
         Message savedMessage = messagePersistenceService.persistMessage(message);
 

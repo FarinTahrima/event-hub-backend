@@ -1,6 +1,7 @@
 package com.fdmgroup.backend_eventhub.livechat.controller;
 
 import com.fdmgroup.backend_eventhub.livechat.models.EmojiReaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +11,7 @@ public class EmojiController {
 
     SimpMessagingTemplate template;
 
-
+    @Autowired
     public EmojiController(SimpMessagingTemplate template) {
         this.template = template;
     }
