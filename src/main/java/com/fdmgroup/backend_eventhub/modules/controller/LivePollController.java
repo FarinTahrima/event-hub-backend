@@ -13,7 +13,7 @@ public class LivePollController {
 
     @MessageMapping("/livePollAction")
     public void triggerLivePollAction(LivePollAction action) {
-        System.out.println(action);
+//        System.out.println(action);
         template.convertAndSend("/topic/livePollAction/" + action.SESSION_ID(), action);
 
     }

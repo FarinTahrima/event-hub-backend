@@ -16,7 +16,7 @@ public class WhiteboardController {
 
     @MessageMapping("/whiteboardAction")
     public void triggerWhiteboardAction(WhiteboardAction action) {
-        System.out.println(action);
+//        System.out.println(action);
         template.convertAndSend("/topic/whiteboardAction/" + action.SESSION_ID(), action);
 
     }

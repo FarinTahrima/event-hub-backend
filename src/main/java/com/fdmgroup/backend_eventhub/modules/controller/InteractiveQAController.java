@@ -15,7 +15,7 @@ public class InteractiveQAController {
 
     @MessageMapping("/interactiveQAAction")
     public void triggerInteractiveQAAction(InteractiveQAAction action) {
-        System.out.println(action);
+//        System.out.println(action);
         template.convertAndSend("/topic/interactiveQAAction/" + action.SESSION_ID(), action);
 
     }
