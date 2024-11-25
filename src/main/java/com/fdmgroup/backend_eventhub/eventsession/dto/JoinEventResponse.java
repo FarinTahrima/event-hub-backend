@@ -1,14 +1,19 @@
 package com.fdmgroup.backend_eventhub.eventsession.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
+@ToString
+@NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class JoinEventResponse {
+    @Getter
     private String token;
+    @Setter
     private String videoSource;
     private String roomId;
     private boolean isHost;
@@ -20,38 +25,30 @@ public class JoinEventResponse {
         this.isHost = isHost;
     }
 
-    public JoinEventResponse() {
-    }
+//    public JoinEventResponse() {
+//    }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getVideoSource() {
-        return videoSource;
-    }
-
-    public void setVideoSource(String videoSource) {
-        this.videoSource = videoSource;
-    }
-
-    public String getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
-    }
-
-    public boolean isHost() {
-        return isHost;
-    }
-
-    public void setHost(boolean host) {
-        isHost = host;
-    }
+//    public void setToken(String token) {
+//        this.token = token;
+//    }
+//
+//    public String getVideoSource() {
+//        return videoSource;
+//    }
+//
+//    public String getRoomId() {
+//        return roomId;
+//    }
+//
+//    public void setRoomId(String roomId) {
+//        this.roomId = roomId;
+//    }
+//
+//    public boolean isHost() {
+//        return isHost;
+//    }
+//
+//    public void setHost(boolean host) {
+//        isHost = host;
+//    }
 }
