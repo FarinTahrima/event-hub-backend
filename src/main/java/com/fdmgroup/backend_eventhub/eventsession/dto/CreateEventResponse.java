@@ -3,9 +3,10 @@ package com.fdmgroup.backend_eventhub.eventsession.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 public class CreateEventResponse {
+
     private String token;
     private String videoSource;
     private String code;
@@ -21,29 +22,6 @@ public class CreateEventResponse {
     public CreateEventResponse() {
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getVideoSource() {
-        return videoSource;
-    }
-
-    public void setVideoSource(String videoSource) {
-        this.videoSource = videoSource;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 
     public boolean isHost() {
         return isHost;
