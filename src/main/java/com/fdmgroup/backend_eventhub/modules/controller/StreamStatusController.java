@@ -104,7 +104,7 @@ public class StreamStatusController {
     @GetMapping("/api/streamStatus/{sessionID}")
     public ResponseEntity<StreamStatus> getStreamStatus(@PathVariable String sessionID) {
         StreamStatus status = streamMap.get(sessionID);
-        if (status == null) {
+        if ( status == null ) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(status);
@@ -119,25 +119,28 @@ public class StreamStatusController {
             String roomId = entry.getKey();
             Set<String> sessions = entry.getValue();
 
-            synchronized ( sessions ) {
-                if ( sessions.remove(wsSessionId) ) {
-                    StreamStatus stream = streamMap.get(roomId);
-                    if ( stream != null ) {
-                        stream.setViewerCount(sessions.size());
-                        streamMap.put(roomId, stream);
+            handleViewerLeave(sessions, wsSessionId, roomId);
+        }
+    }
 
-                        // Notify remaining clients about the viewer count update
-                        template.convertAndSend("/topic/streamStatus/" + roomId,
-                                new StreamStatusRecord("VIEWER_LEAVE",
-                                        UUID.randomUUID().toString(),
-                                        roomId,
-                                        stream.getViewerCount(),
-                                        stream.isLive())
-                        );
-                    }
-                }
+    private synchronized void handleViewerLeave(Set<String> sessions, String wsSessionId, String roomId) {
+        if ( sessions.remove(wsSessionId) ) {
+            StreamStatus stream = streamMap.get(roomId);
+            if ( stream != null ) {
+                stream.setViewerCount(sessions.size());
+                streamMap.put(roomId, stream);
+
+                // Notify remaining clients about the viewer count update
+                template.convertAndSend("/topic/streamStatus/" + roomId,
+                        new StreamStatusRecord("VIEWER_LEAVE",
+                                UUID.randomUUID().toString(),
+                                roomId,
+                                stream.getViewerCount(),
+                                stream.isLive())
+                );
             }
         }
+
     }
 
 

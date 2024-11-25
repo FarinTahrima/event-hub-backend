@@ -2,9 +2,11 @@ package com.fdmgroup.backend_eventhub.eventsession.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class JoinEventResponse {
     private String token;
     private String videoSource;

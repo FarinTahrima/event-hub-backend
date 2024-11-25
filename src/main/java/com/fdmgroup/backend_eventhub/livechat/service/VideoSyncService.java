@@ -19,10 +19,10 @@ public class VideoSyncService {
             groupId = "video-sync-service"
     )
     public void sendVideoSyncMessage(VideoAction action) {
-        System.out.println("Sending video sync message to clients");
+//        System.out.println("Sending video sync message to clients");
         messagingTemplate.convertAndSend("/topic/video/" + action.getSessionId(), action);
-        System.out.println("VideoModule Sync Message sent to clients. " +
-                "Session Id: " + action.getSessionId() +
-                " Action: " + action.getActionType());
+//        System.out.println("VideoModule Sync Message sent to clients. " +
+//                "Session Id: " + action.getSessionId() +
+//                " Action: " + action.getActionType());
     }
 }

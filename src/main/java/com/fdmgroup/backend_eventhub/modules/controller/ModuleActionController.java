@@ -25,7 +25,7 @@ public class ModuleActionController {
 
     @MessageMapping("/moduleAction")
     public void triggerModuleAction(ModuleAction action) {
-        System.out.println(action);
+//        System.out.println(action);
         template.convertAndSend("/topic/moduleAction/" + action.SESSION_ID(), action);
         if ( action.SESSION_ID() != null && !action.SESSION_ID().isEmpty() && !action.TYPE().equals("poll_vote") ) {
             currentModuleMap.put(action.SESSION_ID(), action);
