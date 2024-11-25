@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class JoinEventResponse {
     @Getter
     private String token;
