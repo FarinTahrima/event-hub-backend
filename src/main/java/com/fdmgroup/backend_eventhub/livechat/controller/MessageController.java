@@ -1,6 +1,7 @@
 package com.fdmgroup.backend_eventhub.livechat.controller;
 
 import com.fdmgroup.backend_eventhub.livechat.models.Message;
+import com.fdmgroup.backend_eventhub.livechat.models.MessageType;
 import com.fdmgroup.backend_eventhub.livechat.service.MessagePersistenceService;
 import com.fdmgroup.backend_eventhub.livechat.service.MessageSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +98,18 @@ public class MessageController {
         if ( chatMessagesFromSession.isEmpty() ) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("No messages found for this sessionID");
         } else {
-            return ResponseEntity.ok(chatMessagesFromSession.get());
+            List<Message> messages = chatMessagesFromSession.get();
+            // pre-load messages for demo
+            if ( messages.isEmpty() ) {
+                messages.add(new Message(997, MessageType.CHAT, "This event is amazing!", "timothy", sessionID,
+                        LocalDateTime.now()));
+                messages.add(new Message(998, MessageType.CHAT, "This event sucks!", "kevin", sessionID,
+                        LocalDateTime.now()));
+                messages.add(new Message(998, MessageType.CHAT, "This laptop is pretty cool!", "farin", sessionID,
+                        LocalDateTime.now()));
+            }
+
+            return ResponseEntity.ok(messages);
         }
 
     }
